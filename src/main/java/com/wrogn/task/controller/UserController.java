@@ -35,7 +35,7 @@ public class UserController
 		//return response;
 		//return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		
-		return ResponseEntity.ok("Login Sucessful");
+		return ResponseEntity.ok("Login Sucessfully");
 	}
 	
 	@GetMapping("/{id}")
