@@ -69,11 +69,28 @@ public class UserController
     }
 	
 	@GetMapping("/pagination")
-	public ResponseEntity<Page<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0")int page,
+	public ResponseEntity<Page<UserResponseDto>> getAllUsers
+			(
+			                 @RequestParam(defaultValue = "0")int page,
 			                 @RequestParam(defaultValue = "5") int size,
 			                 @RequestParam(defaultValue = "id") String sortBy
 			)
 	{
 		return ResponseEntity.ok(service.getAllUsersWithPagination(page, size, sortBy));
 	}
+
+
+	@GetMapping("/search")
+	public ResponseEntity<Page<UserResponseDto>> searchApi
+			(
+			                                                    @RequestParam String keyword,
+																@RequestParam int page,
+																@RequestParam int size,
+																@RequestParam String sortBy
+			)
+	{
+		return ResponseEntity.ok(service.searchUsers(keyword,page,size,sortBy));
+	}
+
+
 }
