@@ -136,14 +136,49 @@ public class UserServiceImpl  implements UserService
 	public Page<UserResponseDto> searchUsers(String keyword, int page, int size, String sortBy)
 	{
 		Pageable pageable=PageRequest.of(page,size,Sort.by(sortBy).ascending());
-		Page<UserEntity> userPage=repo.findByEmailContaining(keyword,pageable);
-		return userPage.map(entity->{
+		//Page<UserEntity> user=repo.findByEmailContaining(keyword,pageable); //Day 7
+		Page<UserEntity> user= repo.searchByEmail(keyword,pageable);//Day 8
+
+		return user.map(entity->{
 			UserResponseDto dto=new UserResponseDto();
 			dto.setId(entity.getId());
 			dto.setEmail(entity.getEmail());
 			return dto;
 		});
 
+	}
+
+	@Override
+	public List<UserResponseDto> searchNative(String keyword)
+	{
+
+		List<UserEntity> users =
+				repo.searchNative(keyword);
+
+		return users.stream().map(entity -> {
+
+			UserResponseDto dto =
+					new UserResponseDto();
+
+			dto.setId(entity.getId());
+			dto.setEmail(entity.getEmail());
+
+			return dto;
+
+		}).toList();
+	}
+
+	@Override
+	public UserResponseDto findByEmail(String email) {
+		UserEntity entity=repo.findByEmailCustom(email).orElseThrow(
+				()->new ResourceNotFoundException("User not found with this email"+email));
+		UserResponseDto dto =
+				new UserResponseDto();
+
+		dto.setId(entity.getId());
+		dto.setEmail(entity.getEmail());
+
+		return dto;
 	}
 
 

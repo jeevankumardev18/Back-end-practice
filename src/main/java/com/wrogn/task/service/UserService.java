@@ -18,5 +18,6 @@ public interface UserService
 	    Page<UserResponseDto> getAllUsersWithPagination(int page,int size,String sortBY);
 		Page<UserResponseDto> searchUsers(String keyword,int page,int size,String sortBy);
 
-		
+		List<UserResponseDto> searchNative(String keyword);
+		UserResponseDto findByEmail(String email);
 }

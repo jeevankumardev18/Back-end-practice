@@ -37,7 +37,7 @@ public class UserController
 	{
 				
 		 service.createUser(request);
-		return ResponseEntity.ok("User Created Sucessfully");
+		return ResponseEntity.ok("User Created Successfully");
 	}
 	
 	@GetMapping("/{id}")
@@ -58,7 +58,7 @@ public class UserController
 	public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody UserRequestDto dto)
 	{
 		 service.updateUser(id, dto);
-		return ResponseEntity.ok("User Updated Sucessfully");
+		return ResponseEntity.ok("User Updated Successfully");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -91,6 +91,21 @@ public class UserController
 	{
 		return ResponseEntity.ok(service.searchUsers(keyword,page,size,sortBy));
 	}
+
+
+	@GetMapping("/search/native")
+	public ResponseEntity<List<UserResponseDto>> searchNative(@RequestParam String keyword)
+	{
+		return ResponseEntity.ok(service.searchNative(keyword));
+	}
+
+	@GetMapping("/email")
+	public ResponseEntity<UserResponseDto> getByEmail(@RequestParam String email)
+	{
+		return ResponseEntity.ok(service.findByEmail(email));
+	}
+
+
 
 
 }
