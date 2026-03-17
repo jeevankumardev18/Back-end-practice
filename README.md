@@ -4,7 +4,8 @@
 
 This repository documents my structured journey toward becoming a **job-ready Java Backend Developer (1–3 years experience level)** by building real backend features step by step using industry practices.
 
- This project focuses on 20% Theory and 80% Practical that is 20/80 rule It contains:
+This project follows the 80/20 learning rule:
+---> 80% practical implementation and 20% theoretical understanding.
 
 * Real backend architecture
 * Production coding practices
@@ -27,6 +28,18 @@ This repository documents my structured journey toward becoming a **job-ready Ja
 | Git             | Version control       |
 
 ---
+
+## 🧩 Skills Demonstrated
+
+* REST API Development
+* Layered Architecture Design
+* JPA Entity Relationships
+* Database Modeling
+* Pagination & Filtering APIs
+* Exception Handling Strategy
+* Query Optimization Basics
+* Clean Code Practices
+
 
 ## 🏗️ Architecture Used
 
@@ -103,6 +116,22 @@ Design patterns implemented:
 * @Query usage
 * Optional handling
 
+### ✅ Day 9 – Entity Relationships
+
+* OneToMany relationship
+* ManyToOne relationship
+* Foreign key mapping
+* Bidirectional relationships
+* Order module integration
+
+### ✅ Day 10 – Cascade & Fetch Types
+
+* CascadeType.ALL
+* FetchType.LAZY vs EAGER
+* Relationship lifecycle management
+* JSON infinite recursion fix (@JsonIgnore)
+* Performance considerations
+
 ---
 
 ## 🔎 Features Implemented
@@ -177,10 +206,10 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 8
+Day 1 → Day 10
 
 Backend Skill Level:
-Early Intermediate Java Backend Developer
+Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
@@ -219,6 +248,15 @@ Upcoming backend features:
 * Microservice concepts
 
 ---
+## 🔥 Project Highlights
+
+* Built a layered backend architecture from scratch
+* Implemented real-world entity relationships
+* Designed pagination and filtering APIs
+* Applied JPA best practices
+* Practiced production-style exception handling
+* Structured learning across multiple backend topics
+
 
 ## 💡 Interview Preparation Focus
 
