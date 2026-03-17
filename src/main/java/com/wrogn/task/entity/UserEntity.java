@@ -1,5 +1,6 @@
 package com.wrogn.task.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,7 +18,11 @@ public class UserEntity
 
 	    private String password;
 
-		@OneToMany(mappedBy = "user")
+		@OneToMany(
+				mappedBy = "user",
+				cascade = CascadeType.ALL,
+				fetch = FetchType.LAZY)
+		@JsonIgnore
 		private List<OrderEntity> orders=new ArrayList<>();
 
 		public Long getId() {
@@ -56,4 +61,11 @@ public class UserEntity
 	    	
 	    }
 
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
+    }
 }

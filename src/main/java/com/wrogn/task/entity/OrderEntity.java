@@ -1,5 +1,6 @@
 package com.wrogn.task.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.apache.catalina.User;
 
@@ -16,8 +17,9 @@ public class OrderEntity
 
     private String orderName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserEntity user;
 
     public Long getId() {

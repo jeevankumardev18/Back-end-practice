@@ -33,11 +33,11 @@ public class UserController
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> createUser(@Valid @RequestBody UserRequestDto request)
+	public UserResponseDto createUser(@Valid @RequestBody UserRequestDto request)
 	{
 				
-		 service.createUser(request);
-		return ResponseEntity.ok("User Created Successfully");
+		return service.createUser(request);
+		//ResponseEntity.ok("User Created Successfully");
 	}
 	
 	@GetMapping("/{id}")
