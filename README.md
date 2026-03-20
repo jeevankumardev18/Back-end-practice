@@ -17,7 +17,7 @@ This project follows the 80/20 learning rule:
 ## 🛠️ Tech Stack
 
 | Technology      | Usage                 |
-| --------------- | --------------------- |
+|-----------------|-----------------------|
 | Java 17         | Core backend language |
 | Spring Boot     | REST API development  |
 | Spring Data JPA | Database operations   |
@@ -132,6 +132,14 @@ Design patterns implemented:
 * JSON infinite recursion fix (@JsonIgnore)
 * Performance considerations
 
+### ✅ Day 11 – Transactions
+
+* Transaction management using @Transactional
+* ACID properties (Atomicity, Consistency basics)
+* Automatic rollback on failures
+* Database consistency during multistep operations
+* Testing transaction rollback scenarios
+* Understanding Runtime vs Checked exception rollback behavior
 ---
 
 ## 🔎 Features Implemented
@@ -206,18 +214,18 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 10
+Day 1 → Day 11
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
-* Entity relationships
-* Transactions
+
 * Logging
 * Security basics
-* Performance optimization
+* Performance optimization 
+* ****
 
 ---
 
@@ -238,8 +246,7 @@ Next Focus:
 
 Upcoming backend features:
 
-* Entity Relationships
-* Transaction Management
+
 * Logging (SLF4J)
 * JWT Security
 * API Documentation (Swagger)
