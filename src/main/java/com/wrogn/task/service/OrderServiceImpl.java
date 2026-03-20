@@ -5,7 +5,9 @@ import com.wrogn.task.entity.UserEntity;
 import com.wrogn.task.exceptions.ResourceNotFoundException;
 import com.wrogn.task.repository.OrderRepository;
 import com.wrogn.task.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService
@@ -20,6 +22,7 @@ public class OrderServiceImpl implements OrderService
         this.orderRepository=orderRepository;
     }
 
+    @Transactional
     @Override
     public void createOrder(Long userId, String orderName)
     {
