@@ -3,6 +3,8 @@ package com.wrogn.task.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,17 +27,22 @@ public class UserServiceImpl  implements UserService
 	        this.repo = repo;
 	 }
 
+	 private static final Logger logger=
+			 LoggerFactory.getLogger(UserServiceImpl.class);
+
+
 
 
 	@Override
-	public UserResponseDto createUser(UserRequestDto dto) 
+	public UserResponseDto createUser(UserRequestDto request)
 	{
+		logger.info("Creating user with email: {}",request.getEmail());
 		UserEntity userEntity=new UserEntity();
-		userEntity.setEmail(dto.getEmail());
-		userEntity.setPassword(dto.getPassword());
+		userEntity.setEmail(request.getEmail());
+		userEntity.setPassword(request.getPassword());
 		
 		UserEntity savedUser=repo.save(userEntity);
-		
+		logger.info("User Created with id: {}",userEntity.getId());
 		UserResponseDto response=new UserResponseDto();
 		response.setEmail(savedUser.getEmail());
 		response.setId(savedUser.getId());
@@ -50,9 +57,12 @@ public class UserServiceImpl  implements UserService
 		UserEntity entity = repo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found with id " + id));
+		logger.info("Fetching user with id: {}",id);
 		UserResponseDto response =new UserResponseDto();
 		response.setEmail(entity.getEmail());
 		response.setId(entity.getId());
+
+		logger.error("User not found with id: {}",id);
 		
 		return response;
 		
