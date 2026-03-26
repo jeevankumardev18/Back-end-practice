@@ -140,6 +140,15 @@ Design patterns implemented:
 * Database consistency during multistep operations
 * Testing transaction rollback scenarios
 * Understanding Runtime vs Checked exception rollback behavior
+
+### ✅ Day 12 – Logging (SLF4J)
+
+* Logging using SLF4J Logger and LoggerFactory
+* Replacing System.out.println with structured logging
+* Understanding logging levels (INFO, DEBUG, WARN, ERROR)
+* Adding logs in Service layer for important operations
+* Proper logging format using {} placeholders
+* Logging exceptions and errors for debugging and monitoring
 ---
 
 ## 🔎 Features Implemented
@@ -214,15 +223,14 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 11
+Day 1 → Day 12
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
-
-* Logging
+* Response formats
 * Security basics
 * Performance optimization 
 * ****
@@ -247,7 +255,7 @@ Next Focus:
 Upcoming backend features:
 
 
-* Logging (SLF4J)
+* Response Format
 * JWT Security
 * API Documentation (Swagger)
 * Unit Testing
@@ -283,7 +291,7 @@ Goal:
 Java Backend Developer
 
 Focus:
-Spring Boot | Backend Development | Problem Solving
+Java | Spring Boot | RestApi's | Backend Development | Problem-Solving
 
 ---
 
