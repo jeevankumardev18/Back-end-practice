@@ -2,6 +2,8 @@ package com.wrogn.task.controller;
 
 import java.util.List;
 
+import com.wrogn.task.dto.ApiResponse;
+import com.wrogn.task.dto.ResponseUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,62 +28,73 @@ public class UserController
 {
 	
 	private final UserService service;
-	
+
 	public UserController(UserService service)
 	{
 		this.service=service;
 	}
 	
 	@PostMapping
-	public UserResponseDto createUser(@Valid @RequestBody UserRequestDto request)
+	public ResponseEntity<ApiResponse<UserResponseDto>> createUser(@Valid @RequestBody UserRequestDto request)
 	{
-				
-		return service.createUser(request);
-		//ResponseEntity.ok("User Created Successfully");
+
+		UserResponseDto user=service.createUser(request);
+		return ResponseEntity.status(201).body(ResponseUtil.success("User Created",user));
+
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id)
+	public ResponseEntity<ApiResponse<UserResponseDto>> getUserById(@PathVariable Long id)
 	{
 
-		    return ResponseEntity.ok(service.getUserById(id));
+		UserResponseDto user=service.getUserById(id);
+		return ResponseEntity.ok(ResponseUtil.success("User Fetched",user));
+
 	}
 
 	@GetMapping
-	public ResponseEntity<List<UserResponseDto>> getAll()
+	public ResponseEntity<ApiResponse<List<UserResponseDto>>> getAllUsers()
 	{
-		return ResponseEntity.ok(service.getAllUsers());
+		List<UserResponseDto> users=service.getAllUsers();
+		return  ResponseEntity.ok(ResponseUtil.success("All Users Fetched",users));
+
+
 	}
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody UserRequestDto dto)
+	public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(@PathVariable Long id,@Valid @RequestBody UserRequestDto dto)
 	{
-		 service.updateUser(id, dto);
-		return ResponseEntity.ok("User Updated Successfully");
+		UserResponseDto user= service.updateUser(id, dto);
+		return ResponseEntity.ok(ResponseUtil.success("User Updated",user));
 	}
 	
 	@DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) 
+    public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable Long id)
 	{
 		service.deleteUser(id);
-        return ResponseEntity.ok("User deleted successfully");
+		return ResponseEntity.ok(ResponseUtil.success("User Deleted",null));
     }
 	
 	@GetMapping("/pagination")
-	public ResponseEntity<Page<UserResponseDto>> getAllUsers
+	public ResponseEntity<ApiResponse<Page<UserResponseDto>> > getAllUsersWithPagination
 			(
 			                 @RequestParam(defaultValue = "0")int page,
 			                 @RequestParam(defaultValue = "5") int size,
 			                 @RequestParam(defaultValue = "id") String sortBy
 			)
 	{
-		return ResponseEntity.ok(service.getAllUsersWithPagination(page, size, sortBy));
+
+		Page<UserResponseDto> users=service.getAllUsersWithPagination(page, size, sortBy);
+		return ResponseEntity.ok(ResponseUtil.success("Users Fetched",users));
+
+
+
 	}
 
 
 	@GetMapping("/search")
-	public ResponseEntity<Page<UserResponseDto>> searchApi
+	public ResponseEntity<ApiResponse<Page<UserResponseDto>>> searchApi
 			(
 			                                                    @RequestParam String keyword,
 																@RequestParam int page,
@@ -89,20 +102,24 @@ public class UserController
 																@RequestParam String sortBy
 			)
 	{
-		return ResponseEntity.ok(service.searchUsers(keyword,page,size,sortBy));
+
+		Page<UserResponseDto> users= service.searchUsers(keyword, page, size, sortBy);
+		return ResponseEntity.ok(ResponseUtil.success("Search Users fetched",users));
 	}
 
 
 	@GetMapping("/search/native")
-	public ResponseEntity<List<UserResponseDto>> searchNative(@RequestParam String keyword)
+	public ResponseEntity<ApiResponse<List<UserResponseDto>>> searchNative(@RequestParam String keyword)
 	{
-		return ResponseEntity.ok(service.searchNative(keyword));
+		List<UserResponseDto> user=service.searchNative(keyword);
+		return ResponseEntity.ok(ResponseUtil.success("Search Native users fetched",user));
 	}
 
 	@GetMapping("/email")
-	public ResponseEntity<UserResponseDto> getByEmail(@RequestParam String email)
+	public ResponseEntity<ApiResponse<UserResponseDto>> getByEmail(@RequestParam String email)
 	{
-		return ResponseEntity.ok(service.findByEmail(email));
+		UserResponseDto user=service.findByEmail(email);
+		return ResponseEntity.ok(ResponseUtil.success("User fetched by email",user));
 	}
 
 
