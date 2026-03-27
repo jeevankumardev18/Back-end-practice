@@ -149,6 +149,15 @@ Design patterns implemented:
 * Adding logs in Service layer for important operations
 * Proper logging format using {} placeholders
 * Logging exceptions and errors for debugging and monitoring
+
+### ✅ Day 13 – Standard API Response Structure
+
+* Creating a generic ApiResponse<T> wrapper for consistent responses
+* Standardizing success and error API responses
+* Implementing ResponseUtil to reduce boilerplate code
+* Refactoring controllers to use structured responses
+* Updating GlobalExceptionHandler to return standardized error responses
+* Improving API consistency for better frontend integration and debugging
 ---
 
 ## 🔎 Features Implemented
@@ -223,14 +232,13 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 12
+Day 1 → Day 13
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
-* Response formats
 * Security basics
 * Performance optimization 
 * ****
@@ -254,8 +262,6 @@ Next Focus:
 
 Upcoming backend features:
 
-
-* Response Format
 * JWT Security
 * API Documentation (Swagger)
 * Unit Testing
