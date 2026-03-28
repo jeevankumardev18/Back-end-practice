@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler 
@@ -26,11 +26,12 @@ public class GlobalExceptionHandler
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ApiResponse<String>> handleValidation(MethodArgumentNotValidException ex)
+	public ResponseEntity<ApiResponse<List<String>>> handleValidation(MethodArgumentNotValidException ex)
 	{
-		String message=ex.getBindingResult().getFieldError().getDefaultMessage();
+		List<String> errors=ex.getBindingResult().getFieldErrors().stream()
+				.map(fieldError->fieldError.getField()+":"+fieldError.getDefaultMessage()).toList();
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(ResponseUtil.error(message));
+				.body(ResponseUtil.error("Validation failed",errors));
 	}
 	
 	

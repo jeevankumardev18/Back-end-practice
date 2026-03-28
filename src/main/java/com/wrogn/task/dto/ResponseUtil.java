@@ -19,4 +19,10 @@ public class ResponseUtil
         );
     }
 
+    public static <T> ApiResponse<T> error(String message,T data)
+    {
+        return new ApiResponse<>(
+                "Error",message,data,LocalDateTime.now()
+        );
+    }
 }
