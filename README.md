@@ -158,6 +158,17 @@ Design patterns implemented:
 * Refactoring controllers to use structured responses
 * Updating GlobalExceptionHandler to return standardized error responses
 * Improving API consistency for better frontend integration and debugging
+
+### ✅ Day 14 – Advanced Validation
+* Improving DTO validation using @NotBlank, @Email, and @Size
+* Handling multiple validation errors instead of a single error
+* Enhancing GlobalExceptionHandler to return structured validation responses
+* Using Java Streams to collect validation error messages
+* Improving validation messages for better API usability
+* Implementing better error response design for frontend integration
+
+
+
 ---
 
 ## 🔎 Features Implemented
@@ -232,7 +243,7 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 13
+Day 1 → Day 14
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
