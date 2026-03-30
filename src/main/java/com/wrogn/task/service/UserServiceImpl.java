@@ -1,8 +1,8 @@
 package com.wrogn.task.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.wrogn.task.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -37,17 +37,10 @@ public class UserServiceImpl  implements UserService
 	public UserResponseDto createUser(UserRequestDto request)
 	{
 		logger.info("Creating user with email: {}",request.getEmail());
-		UserEntity userEntity=new UserEntity();
-		userEntity.setEmail(request.getEmail());
-		userEntity.setPassword(request.getPassword());
-		
+		UserEntity userEntity=UserMapper.toEntity(request);
 		UserEntity savedUser=repo.save(userEntity);
-		logger.info("User Created with id: {}",userEntity.getId());
-		UserResponseDto response=new UserResponseDto();
-		response.setEmail(savedUser.getEmail());
-		response.setId(savedUser.getId());
-		
-		return response;
+		logger.info("User created with id: {}",savedUser.getId());
+		return UserMapper.toDto(savedUser);
 	}
 
 
@@ -56,15 +49,14 @@ public class UserServiceImpl  implements UserService
 	{
 		UserEntity entity = repo.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found with id " + id));
-		logger.info("Fetching user with id: {}",id);
-		UserResponseDto response =new UserResponseDto();
-		response.setEmail(entity.getEmail());
-		response.setId(entity.getId());
+				{
+					logger.error("User not found with id: {}",id);
+					return new ResourceNotFoundException("User not found with id " + id);
+				});
 
-		logger.error("User not found with id: {}",id);
-		
-		return response;
+		logger.info("Fetching user with id: {}",id);
+
+		return UserMapper.toDto(entity);
 		
 	}
 
@@ -73,37 +65,26 @@ public class UserServiceImpl  implements UserService
 	public List<UserResponseDto> getAllUsers() 
 	{
 		List<UserEntity> entity=repo.findAll();
-		
-		if(entity.isEmpty())
-		{
-			return new ArrayList<>();
-		}
-		return entity.stream().map(en->{
-			UserResponseDto dto=new UserResponseDto();
-			dto.setId(en.getId());
-			dto.setEmail(en.getEmail());
-			return dto;
-		}).toList();
+		return entity.stream().map(UserMapper::toDto).toList();
 	}
 
 
 
 	@Override
-	public UserResponseDto updateUser(Long id, UserRequestDto dto) 
+	public UserResponseDto updateUser(Long id, UserRequestDto dto)
 	{
-		UserEntity entity=repo.findById(id)
-        .orElseThrow(() ->
-                new ResourceNotFoundException("User not found with id " + id));
-		
-		entity.setEmail(dto.getEmail());
-		entity.setPassword(dto.getPassword());
-		
-		UserEntity updatedUser=repo.save(entity);
-		
-		 UserResponseDto response = new UserResponseDto();
-		 response.setId(updatedUser.getId());
-		 response.setEmail(updatedUser.getEmail());
-		return response;
+		logger.info("Updating user {}",id);
+		UserEntity entity = repo.findById(id)
+				.orElseThrow(() ->
+				{
+					logger.error("User not found {}",id);
+					return new ResourceNotFoundException("User not found with id " + id);
+				});
+		UserMapper.updateEntity(entity,dto);
+
+		UserEntity updatedUser = repo.save(entity);
+		logger.info("User updated {}",id);
+		return UserMapper.toDto(updatedUser);
 	}
 
 
@@ -114,16 +95,9 @@ public class UserServiceImpl  implements UserService
 		UserEntity entity = repo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found with id " + id));
-		
+		logger.info("Deleting user {}",id);
 		repo.delete(entity);
 	}
-
-
-
-
-
-
-
 
 
 	@Override
@@ -131,15 +105,7 @@ public class UserServiceImpl  implements UserService
 	{
 		Pageable request=PageRequest.of(page, size,Sort.by(sortBY).ascending());
 		Page<UserEntity> userPage=repo.findAll(request);
-		
-		return userPage.map(entity->{ 
-			                                 	//Map to  Entity -> UserResponseDto...
-			UserResponseDto dto=new UserResponseDto();
-			dto.setId(entity.getId());
-			dto.setEmail(entity.getEmail());
-			
-			return dto;
-		});  
+		return userPage.map(UserMapper::toDto);
 	}
 
 	@Override
@@ -148,13 +114,7 @@ public class UserServiceImpl  implements UserService
 		Pageable pageable=PageRequest.of(page,size,Sort.by(sortBy).ascending());
 		//Page<UserEntity> user=repo.findByEmailContaining(keyword,pageable); //Day 7
 		Page<UserEntity> user= repo.searchByEmail(keyword,pageable);//Day 8
-
-		return user.map(entity->{
-			UserResponseDto dto=new UserResponseDto();
-			dto.setId(entity.getId());
-			dto.setEmail(entity.getEmail());
-			return dto;
-		});
+		return user.map(UserMapper::toDto);
 
 	}
 
@@ -162,33 +122,16 @@ public class UserServiceImpl  implements UserService
 	public List<UserResponseDto> searchNative(String keyword)
 	{
 
-		List<UserEntity> users =
-				repo.searchNative(keyword);
-
-		return users.stream().map(entity -> {
-
-			UserResponseDto dto =
-					new UserResponseDto();
-
-			dto.setId(entity.getId());
-			dto.setEmail(entity.getEmail());
-
-			return dto;
-
-		}).toList();
+		List<UserEntity> users = repo.searchNative(keyword);
+		return users.stream().map(UserMapper::toDto).toList();
 	}
 
 	@Override
-	public UserResponseDto findByEmail(String email) {
+	public UserResponseDto findByEmail(String email)
+	{
 		UserEntity entity=repo.findByEmailCustom(email).orElseThrow(
 				()->new ResourceNotFoundException("User not found with this email"+email));
-		UserResponseDto dto =
-				new UserResponseDto();
-
-		dto.setId(entity.getId());
-		dto.setEmail(entity.getEmail());
-
-		return dto;
+		return UserMapper.toDto(entity);
 	}
 
 

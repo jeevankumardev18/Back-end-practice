@@ -39,10 +39,6 @@ public class OrderServiceImpl implements OrderService
                     return new ResourceNotFoundException("User Not Found");
                 });
 
-
-
-
-
         OrderEntity order=new OrderEntity();
         order.setOrderName(orderName);
         logger.info("Order name: {}",orderName);
