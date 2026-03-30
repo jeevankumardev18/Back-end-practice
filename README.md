@@ -167,7 +167,13 @@ Design patterns implemented:
 * Improving validation messages for better API usability
 * Implementing better error response design for frontend integration
 
-
+### ✅ Day 15 – DTO Mapping (Mapper Pattern)
+* Implementing Mapper classes to convert Entity ↔ DTO
+* Removing manual conversion logic from Service layer
+* Using static mapper methods for reusable conversions
+* Improving code maintainability by centralizing mapping logic
+* Using Java Streams for list DTO conversion
+* Refactoring update operations using mapper update methods
 
 ---
 
@@ -243,7 +249,7 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 14
+Day 1 → Day 15
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
