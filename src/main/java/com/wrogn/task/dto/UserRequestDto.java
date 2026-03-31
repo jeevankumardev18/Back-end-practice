@@ -1,12 +1,15 @@
 package com.wrogn.task.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+@Schema(description = "User request data")
 public class UserRequestDto 
 {
 
+	@Schema(description = "User email",example = "jeev@gmail.com")
 	@NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
 	private String email;

@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.wrogn.task.dto.ApiResponse;
 import com.wrogn.task.dto.ResponseUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +27,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name="User API", description="User management endpoints")
 public class UserController 
 {
 	
@@ -33,8 +37,16 @@ public class UserController
 	{
 		this.service=service;
 	}
-	
+
+
 	@PostMapping
+	@Operation(summary = "Create user", description = "Creates a new user")
+	@ApiResponses({
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "User created successfully"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Validation error"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+	})
+
 	public ResponseEntity<ApiResponse<UserResponseDto>> createUser(@Valid @RequestBody UserRequestDto request)
 	{
 
@@ -42,8 +54,14 @@ public class UserController
 		return ResponseEntity.status(201).body(ResponseUtil.success("User Created",user));
 
 	}
-	
+
+
 	@GetMapping("/{id}")
+	@Operation(summary = "Get user by id", description = "Fetches user details using user id")
+	@ApiResponses({
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "User found"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "User not found")
+	})
 	public ResponseEntity<ApiResponse<UserResponseDto>> getUserById(@PathVariable Long id)
 	{
 
@@ -52,7 +70,9 @@ public class UserController
 
 	}
 
+
 	@GetMapping
+	@Operation(summary = "Get All users",description = "Fetched all user details")
 	public ResponseEntity<ApiResponse<List<UserResponseDto>>> getAllUsers()
 	{
 		List<UserResponseDto> users=service.getAllUsers();
@@ -61,15 +81,19 @@ public class UserController
 
 	}
 	
-	
+
+
 	@PutMapping("/{id}")
+	@Operation(summary = "Update user",description = "Updated a user")
 	public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(@PathVariable Long id,@Valid @RequestBody UserRequestDto dto)
 	{
 		UserResponseDto user= service.updateUser(id, dto);
 		return ResponseEntity.ok(ResponseUtil.success("User Updated",user));
 	}
-	
+
+
 	@DeleteMapping("/{id}")
+	@Operation(summary="Delete user", description="Deletes user by id")
     public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable Long id)
 	{
 		service.deleteUser(id);
@@ -126,3 +150,6 @@ public class UserController
 
 
 }
+
+
+// Swagger is used to document and test REST APIs automatically using OpenAPI specification.

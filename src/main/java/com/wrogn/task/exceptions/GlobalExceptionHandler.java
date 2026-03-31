@@ -3,6 +3,7 @@ package com.wrogn.task.exceptions;
 import com.wrogn.task.dto.ApiResponse;
 
 import com.wrogn.task.dto.ResponseUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,12 +34,21 @@ public class GlobalExceptionHandler
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(ResponseUtil.error("Validation failed",errors));
 	}
-	
-	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ApiResponse<String>> handleGeneric(Exception ex)
+
+
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<ApiResponse<String>> handleGeneric(RuntimeException ex,
+															 HttpServletRequest request)
 	{
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+
+		if(request.getRequestURI().contains("api-docs"))
+		{
+			throw new RuntimeException(ex);
+		}
+
+		return ResponseEntity
+				.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.body(ResponseUtil.error("Internal server error"));
+
 	}
 }
