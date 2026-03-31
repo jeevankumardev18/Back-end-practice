@@ -176,7 +176,7 @@ Design patterns implemented:
 * Refactoring update operations using mapper update methods
 
 
-### Day 16 – Swagger API Documentation
+### ✅ Day 16 – Swagger API Documentation
 * Swagger integration using SpringDoc OpenAPI
 * Auto generated REST API documentation
 * Testing APIs using Swagger UI
