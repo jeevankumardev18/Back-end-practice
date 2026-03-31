@@ -175,6 +175,15 @@ Design patterns implemented:
 * Using Java Streams for list DTO conversion
 * Refactoring update operations using mapper update methods
 
+
+### Day 16 – Swagger API Documentation
+* Swagger integration using SpringDoc OpenAPI
+* Auto generated REST API documentation
+* Testing APIs using Swagger UI
+* API request/response visualization
+* Adding @Operation and @Tag annotations
+* API response documentation using @ApiResponses
+* Improving API discoverability
 ---
 
 ## 🔎 Features Implemented
@@ -249,7 +258,7 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 15
+Day 1 → Day 16
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
