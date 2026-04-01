@@ -184,6 +184,19 @@ Design patterns implemented:
 * Adding @Operation and @Tag annotations
 * API response documentation using @ApiResponses
 * Improving API discoverability
+
+### Day 17 – Spring Security Basics
+* Introduction to Spring Security and why APIs must be protected
+* Adding Spring Security dependency
+* Understanding authentication vs authorization
+* Default Spring Security behavior (all endpoints secured)
+* Configuring SecurityFilterChain
+* Allowing public endpoints (Swagger + create user)
+* Securing private endpoints
+* Disabling CSRF for REST APIs
+* Understanding Basic Authentication flow
+* Preparing project for JWT authentication (next step)
+
 ---
 
 ## 🔎 Features Implemented
