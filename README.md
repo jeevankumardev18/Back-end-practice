@@ -271,7 +271,7 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 16
+Day 1 → Day 17
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
