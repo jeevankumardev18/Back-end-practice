@@ -185,7 +185,7 @@ Design patterns implemented:
 * API response documentation using @ApiResponses
 * Improving API discoverability
 
-### Day 17 – Spring Security Basics
+### ✅ Day 17 – Spring Security Basics
 * Introduction to Spring Security and why APIs must be protected
 * Adding Spring Security dependency
 * Understanding authentication vs authorization
@@ -197,6 +197,17 @@ Design patterns implemented:
 * Understanding Basic Authentication flow
 * Preparing project for JWT authentication (next step)
 
+### ✅ Day 18 – JWT Authentication
+* Implementing JWT token generation after successful login
+* Creating authentication endpoint (/api/auth/login)
+* Understanding JWT structure (Header, Payload, Signature)
+* Implementing custom JWT authentication filter
+* Validating JWT token before accessing protected APIs
+* Using Authorization header with Bearer token
+* Integrating JWT with Spring Security filter chain
+* Stateless authentication using SecurityContextHolder
+* Protecting APIs using JWT instead of Basic Auth
+* Understanding 401 Unauthorized vs 403 Forbidden in JWT flow
 ---
 
 ## 🔎 Features Implemented
@@ -271,7 +282,7 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 17
+Day 1 → Day 18
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
