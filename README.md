@@ -209,7 +209,7 @@ Design patterns implemented:
 * Protecting APIs using JWT instead of Basic Auth
 * Understanding 401 Unauthorized vs 403 Forbidden in JWT flow
 
-### Day 19 – Role Based Access Control (RBAC)
+### ✅ Day 19 – Role Based Access Control (RBAC)
 * Understanding Authentication vs Authorization
 * Introduction to RBAC (Role Based Access Control)
 * Adding roles to User entity (ADMIN, USER)
