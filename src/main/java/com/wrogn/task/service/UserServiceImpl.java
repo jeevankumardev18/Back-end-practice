@@ -2,6 +2,7 @@ package com.wrogn.task.service;
 
 import java.util.List;
 
+import com.wrogn.task.entity.Role;
 import com.wrogn.task.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ public class UserServiceImpl  implements UserService
 	{
 		logger.info("Creating user with email: {}",request.getEmail());
 		UserEntity userEntity=UserMapper.toEntity(request);
+		userEntity.setRole(Role.valueOf("USER"));
 		UserEntity savedUser=repo.save(userEntity);
 		logger.info("User created with id: {}",savedUser.getId());
 		return UserMapper.toDto(savedUser);

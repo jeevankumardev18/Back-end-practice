@@ -6,11 +6,13 @@ import com.wrogn.task.dto.ResponseUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -51,4 +53,18 @@ public class GlobalExceptionHandler
 				.body(ResponseUtil.error("Internal server error"));
 
 	}
+
+
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<ApiResponse<String >> handleAccessDenied(AccessDeniedException ex)
+	{
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ResponseUtil.error("Access Denied"));
+	}
+
+	@ExceptionHandler(AuthorizationDeniedException.class)
+	public ResponseEntity<ApiResponse<String >> handleAuthorizeDenied(AuthorizationDeniedException ex)
+	{
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ResponseUtil.error("Access Denied"));
+	}
+
 }

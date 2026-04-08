@@ -18,6 +18,11 @@ public class UserEntity
 
 	    private String password;
 
+		@Enumerated(EnumType.STRING)
+		@Column(nullable = false)
+		private Role role;
+
+
 		@OneToMany(
 				mappedBy = "user",
 				cascade = CascadeType.ALL,
@@ -49,11 +54,12 @@ public class UserEntity
 			this.password = password;
 		}
 
-		public UserEntity(Long id, String email, String password) {
+		public UserEntity(Long id, String email, String password,Role role) {
 			super();
 			this.id = id;
 			this.email = email;
 			this.password = password;
+			this.role=role;
 		}
 	    
 	    public UserEntity()
@@ -68,4 +74,12 @@ public class UserEntity
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }

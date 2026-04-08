@@ -13,10 +13,11 @@ public class JwtUtil
     private static final String SECRET="mysecretkeymysecretkeymysecretkeyjwtauthenticationforspringsecurity";
     private static final Key KEY=Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
-    public static String generateToken(String email)
+    public static String generateToken(String email,String role)
     {
         return Jwts
                 .builder()
+                .claim("role",role)
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+86400000))
@@ -52,6 +53,17 @@ public class JwtUtil
         }
     }
 
+
+    public static String  extractRole(String token)
+    {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role",String.class);
+    }
 
 
 
