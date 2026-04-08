@@ -208,6 +208,19 @@ Design patterns implemented:
 * Stateless authentication using SecurityContextHolder
 * Protecting APIs using JWT instead of Basic Auth
 * Understanding 401 Unauthorized vs 403 Forbidden in JWT flow
+
+### Day 19 – Role Based Access Control (RBAC)
+* Understanding Authentication vs Authorization
+* Introduction to RBAC (Role Based Access Control)
+* Adding roles to User entity (ADMIN, USER)
+* Storing roles in database
+* Adding roles inside JWT payload
+* Extracting roles from JWT during authentication
+* Using Spring Security authorities
+* Protecting endpoints using roles
+* Using @PreAuthorize for method-level security
+* Restricting APIs based on user roles
+* Testing role-based access using Swagger/Postman
 ---
 
 ## 🔎 Features Implemented
@@ -282,14 +295,14 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 18
+Day 1 → Day 19
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
-* Security basics
+* Unit Testing
 * Performance optimization 
 * ****
 
