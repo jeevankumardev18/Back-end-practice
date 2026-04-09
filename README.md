@@ -221,6 +221,18 @@ Design patterns implemented:
 * Using @PreAuthorize for method-level security
 * Restricting APIs based on user roles
 * Testing role-based access using Swagger/Postman
+
+### ✅ Day 20 – Unit Testing (JUnit + Mockito)
+* Introduction to unit testing in backend development
+* Writing tests using JUnit 5
+* Mocking dependencies using Mockito
+* Testing Service layer business logic
+* Testing success and failure scenarios
+* Verifying method calls using Mockito
+* Understanding @Mock vs @InjectMocks
+* Running tests without starting Spring Boot
+
+
 ---
 
 ## 🔎 Features Implemented
@@ -295,14 +307,14 @@ This project focuses on mastering:
 ## 📈 Current Progress
 
 Completed:
-Day 1 → Day 19
+Day 1 → Day 20
 
 Backend Skill Level:
 Intermediate Java Backend Developer (Building production-style APIs)
 
 Next Focus:
 
-* Unit Testing
+* Integration Testing
 * Performance optimization 
 * ****
 

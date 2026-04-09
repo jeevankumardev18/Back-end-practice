@@ -84,6 +84,7 @@ public class UserController
 	
 
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Update user",description = "Updated a user")
 	public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(@PathVariable Long id,@Valid @RequestBody UserRequestDto dto)

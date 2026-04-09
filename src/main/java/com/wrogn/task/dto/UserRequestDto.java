@@ -41,6 +41,11 @@ public class UserRequestDto
 		this.email = email;
 		this.password = password;
 	}
-	
+
+	public UserRequestDto()
+	{
+
+	}
+
 	
 }
