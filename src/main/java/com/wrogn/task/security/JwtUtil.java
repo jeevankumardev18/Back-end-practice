@@ -1,64 +1,98 @@
 package com.wrogn.task.security;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import io.jsonwebtoken.SignatureException;
+
 import java.util.Date;
 
-
+@Component
 public class JwtUtil
 {
-    private static final String SECRET="mysecretkeymysecretkeymysecretkeyjwtauthenticationforspringsecurity";
-    private static final Key KEY=Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    @Value("${jwt.secret}")
+    private  String secret;
 
-    public static String generateToken(String email,String role)
+    @Value("${jwt.expiration}")
+    private  long expiration;
+
+
+
+    private Key getSigningKey()
+    {
+        return Keys.hmacShaKeyFor(
+                secret.getBytes(StandardCharsets.UTF_8));
+    }
+    public  String generateToken(String email,String role)
     {
         return Jwts
                 .builder()
                 .claim("role",role)
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+86400000))
-                .signWith(KEY)
+                .setExpiration(new Date(System.currentTimeMillis()+expiration ))
+                .signWith(getSigningKey())
                 .compact();
 
     }
 
-    public static String extractEmail(String token)
+    public  String extractEmail(String token)
     {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(KEY)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
 
-    public static boolean validateToken(String token)
+    public  boolean validateToken(String token)
     {
         try
         {
             Jwts
                     .parserBuilder()
-                    .setSigningKey(KEY)
+                    .setSigningKey(getSigningKey())
                     .build()
                     .parseClaimsJws(token);
 
             return true;
-        } catch (Exception e) {
-             return false;
         }
+        catch(ExpiredJwtException e)
+        {
+            throw new RuntimeException("Token Expired");
+        }
+
+        catch(MalformedJwtException e)
+        {
+            throw new RuntimeException("Invalid Token");
+        }
+
+        catch(SignatureException e)
+        {
+            throw new RuntimeException("Invalid Signature");
+        }
+
+        catch(Exception e)
+        {
+            throw new RuntimeException("Token Validation Failed");
+        }
+
     }
 
 
-    public static String  extractRole(String token)
+    public  String  extractRole(String token)
     {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(KEY)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()

@@ -1,5 +1,6 @@
 package com.wrogn.task.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,7 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig
 {
-
+    @Autowired
+    private JwtFilter jwtFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws  Exception
     {
@@ -29,7 +31,7 @@ public class SecurityConfig
                                 .requestMatchers(HttpMethod.POST,"/api/users").permitAll()
                                 .anyRequest().authenticated())
 
-                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore( jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 

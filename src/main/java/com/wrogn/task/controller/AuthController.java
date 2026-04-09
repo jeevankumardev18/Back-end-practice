@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController
 {
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserRepository userRepository)
+    public AuthController(UserRepository userRepository,JwtUtil jwtUtil)
     {
         this.userRepository=userRepository;
+        this.jwtUtil=jwtUtil;
     }
 
 
@@ -35,7 +37,7 @@ public class AuthController
          throw new RuntimeException("Invalid password");
      }
 
-     String token=JwtUtil.generateToken(user.getEmail(),user.getRole().name());
+     String token=jwtUtil.generateToken(user.getEmail(),user.getRole().name());
      return ResponseEntity.ok(token);
     }
 
