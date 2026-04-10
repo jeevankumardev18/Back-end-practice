@@ -1,4 +1,4 @@
-package com.wrogn.task.dto;
+package com.wrogn.task.dto.response;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ public class ApiResponse<T>
 
     private LocalDateTime timeStamp;
 
-    public ApiResponse(String status, String message, T data,LocalDateTime timeStamp ) {
+    public ApiResponse(String status, String message, T data, LocalDateTime timeStamp ) {
         this.status = status;
         this.message = message;
         this.data = data;

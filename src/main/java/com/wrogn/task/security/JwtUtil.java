@@ -23,6 +23,9 @@ public class JwtUtil
     private  long expiration;
 
 
+    @Value("${jwt.refresh.expiration")
+    private long refreshExpiration;
+
 
     private Key getSigningKey()
     {
@@ -40,6 +43,18 @@ public class JwtUtil
                 .signWith(getSigningKey())
                 .compact();
 
+    }
+
+
+    public String generateRefreshToken(String email)
+    {
+        return Jwts
+                .builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis()+refreshExpiration))
+                .signWith(getSigningKey())
+                .compact();
     }
 
     public  String extractEmail(String token)

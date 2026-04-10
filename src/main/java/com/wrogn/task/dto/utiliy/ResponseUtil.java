@@ -1,10 +1,12 @@
-package com.wrogn.task.dto;
+package com.wrogn.task.dto.utiliy;
+
+import com.wrogn.task.dto.response.ApiResponse;
 
 import java.time.LocalDateTime;
 
 public class ResponseUtil
 {
-    public static <T> ApiResponse<T> success(String message,T data)
+    public static <T> ApiResponse<T> success(String message, T data)
     {
         return new ApiResponse<>(
                 "Success",message,data, LocalDateTime.now()

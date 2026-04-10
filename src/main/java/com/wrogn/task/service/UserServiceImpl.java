@@ -2,6 +2,8 @@ package com.wrogn.task.service;
 
 import java.util.List;
 
+import com.wrogn.task.dto.request.UserRequestDto;
+import com.wrogn.task.dto.response.UserResponseDto;
 import com.wrogn.task.entity.Role;
 import com.wrogn.task.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -12,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.wrogn.task.dto.UserRequestDto;
-import com.wrogn.task.dto.UserResponseDto;
 import com.wrogn.task.entity.UserEntity;
 import com.wrogn.task.exceptions.ResourceNotFoundException;
 import com.wrogn.task.repository.UserRepository;

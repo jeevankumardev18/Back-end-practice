@@ -1,8 +1,7 @@
 package com.wrogn.task.exceptions;
 
-import com.wrogn.task.dto.ApiResponse;
-
-import com.wrogn.task.dto.ResponseUtil;
+import com.wrogn.task.dto.response.ApiResponse;
+import com.wrogn.task.dto.utiliy.ResponseUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class GlobalExceptionHandler
     
 
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ApiResponse<String> > handleNotFound(ResourceNotFoundException ex)
+	public ResponseEntity<ApiResponse<String>> handleNotFound(ResourceNotFoundException ex)
 	{
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
 				.body(ResponseUtil.error(ex.getMessage()));

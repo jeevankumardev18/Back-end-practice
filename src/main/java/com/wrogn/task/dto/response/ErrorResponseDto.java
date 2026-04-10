@@ -1,4 +1,4 @@
-package com.wrogn.task.dto;
+package com.wrogn.task.dto.response;
 
 import java.time.LocalDateTime;
 

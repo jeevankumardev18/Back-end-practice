@@ -1,6 +1,5 @@
 package com.wrogn.task.controller;
 
-import com.wrogn.task.dto.LoginRequestDto;
 import com.wrogn.task.entity.UserEntity;
 import com.wrogn.task.exceptions.ResourceNotFoundException;
 import com.wrogn.task.repository.UserRepository;

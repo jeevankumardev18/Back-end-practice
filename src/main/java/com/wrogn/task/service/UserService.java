@@ -2,10 +2,9 @@ package com.wrogn.task.service;
 
 import java.util.List;
 
+import com.wrogn.task.dto.request.UserRequestDto;
+import com.wrogn.task.dto.response.UserResponseDto;
 import org.springframework.data.domain.Page;
-
-import com.wrogn.task.dto.UserRequestDto;
-import com.wrogn.task.dto.UserResponseDto;
 
 
 public interface UserService 

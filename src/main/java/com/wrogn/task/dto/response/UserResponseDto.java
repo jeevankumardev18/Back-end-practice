@@ -1,9 +1,18 @@
-package com.wrogn.task.dto;
+package com.wrogn.task.dto.response;
 
 public class UserResponseDto 
 {
 	private Long id;
     private String email;
+
+	public UserResponseDto(Long id, String email) {
+		this.id = id;
+		this.email = email;
+	}
+
+	public UserResponseDto()
+	{}
+
 	public Long getId() {
 		return id;
 	}

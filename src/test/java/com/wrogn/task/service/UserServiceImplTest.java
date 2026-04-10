@@ -1,7 +1,7 @@
 package com.wrogn.task.service;
 
-import com.wrogn.task.dto.UserRequestDto;
-import com.wrogn.task.dto.UserResponseDto;
+import com.wrogn.task.dto.request.UserRequestDto;
+import com.wrogn.task.dto.response.UserResponseDto;
 import com.wrogn.task.entity.UserEntity;
 import com.wrogn.task.exceptions.ResourceNotFoundException;
 import com.wrogn.task.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.wrogn.task.dto;
+package com.wrogn.task.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -34,9 +34,7 @@ public class UserRequestDto
 		this.password = password;
 	}
 
-	public UserRequestDto(
-			@NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
-			@NotBlank(message = "Password is required") @Size(min = 6, message = "Password must be at least 6 characters") String password) {
+	public UserRequestDto(String email,String password) {
 		super();
 		this.email = email;
 		this.password = password;

@@ -2,8 +2,9 @@ package com.wrogn.task.controller;
 
 import java.util.List;
 
-import com.wrogn.task.dto.ApiResponse;
-import com.wrogn.task.dto.ResponseUtil;
+import com.wrogn.task.dto.request.UserRequestDto;
+import com.wrogn.task.dto.response.UserResponseDto;
+import com.wrogn.task.dto.utiliy.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wrogn.task.dto.UserRequestDto;
-import com.wrogn.task.dto.UserResponseDto;
 import com.wrogn.task.service.UserService;
 
 import jakarta.validation.Valid;
