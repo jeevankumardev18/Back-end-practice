@@ -8,10 +8,12 @@ import com.wrogn.task.entity.Role;
 import com.wrogn.task.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wrogn.task.entity.UserEntity;
@@ -21,7 +23,8 @@ import com.wrogn.task.repository.UserRepository;
 @Service
 public class UserServiceImpl  implements UserService
 {
-	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	private final UserRepository repo;
 	 public UserServiceImpl(UserRepository repo) 
 	 {
@@ -39,7 +42,8 @@ public class UserServiceImpl  implements UserService
 	{
 		logger.info("Creating user with email: {}",request.getEmail());
 		UserEntity userEntity=UserMapper.toEntity(request);
-		userEntity.setRole(Role.valueOf("USER"));
+		userEntity.setPassword(passwordEncoder.encode(request.getPassword()));
+		userEntity.setRole(Role.ROLE_ADMIN);
 		UserEntity savedUser=repo.save(userEntity);
 		logger.info("User created with id: {}",savedUser.getId());
 		return UserMapper.toDto(savedUser);

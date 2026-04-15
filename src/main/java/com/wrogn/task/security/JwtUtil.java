@@ -23,7 +23,7 @@ public class JwtUtil
     private  long expiration;
 
 
-    @Value("${jwt.refresh.expiration")
+    @Value("${jwt.refresh.expiration}")
     private long refreshExpiration;
 
 

@@ -1,9 +1,14 @@
 package com.wrogn.task.controller;
 
+import com.wrogn.task.dto.request.LoginRequestDto;
+import com.wrogn.task.dto.request.RefreshTokenRequestDto;
+import com.wrogn.task.dto.response.LoginResponseDto;
+import com.wrogn.task.dto.response.RefreshTokenResponseDto;
 import com.wrogn.task.entity.UserEntity;
 import com.wrogn.task.exceptions.ResourceNotFoundException;
 import com.wrogn.task.repository.UserRepository;
 import com.wrogn.task.security.JwtUtil;
+import com.wrogn.task.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,28 +21,28 @@ public class AuthController
 {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final AuthService authService;
 
-    public AuthController(UserRepository userRepository,JwtUtil jwtUtil)
+    public AuthController(UserRepository userRepository,JwtUtil jwtUtil,AuthService authService)
     {
         this.userRepository=userRepository;
         this.jwtUtil=jwtUtil;
+        this.authService=authService;
     }
 
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto dto)
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto dto)
     {
-     UserEntity user= userRepository.findByEmailCustom(dto.getEmail())
-              .orElseThrow(()-> new ResourceNotFoundException("Invalid email"));
 
-     if(!user.getPassword() .equals(dto.getPassword()))
-     {
-         throw new RuntimeException("Invalid password");
-     }
+     return ResponseEntity.ok(authService.loginToken(dto));
+    }
 
-     String token=jwtUtil.generateToken(user.getEmail(),user.getRole().name());
-     return ResponseEntity.ok(token);
+    @PostMapping("/refresh")
+    public ResponseEntity<RefreshTokenResponseDto> refresh(@RequestBody RefreshTokenRequestDto dto) {
+
+        return ResponseEntity.ok(authService.refreshToken(dto));
     }
 
 }
