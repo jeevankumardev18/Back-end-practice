@@ -1,10 +1,12 @@
 com\wrogn\task\security\SecurityConfig.class
+com\wrogn\task\service\AuthService.class
 com\wrogn\task\dto\response\RefreshTokenResponseDto.class
 com\wrogn\task\service\OrderServiceImpl.class
 com\wrogn\task\controller\UserController.class
 com\wrogn\task\dto\request\UserRequestDto.class
 com\wrogn\task\dto\response\ApiResponse.class
 com\wrogn\task\dto\response\LoginResponseDto.class
+com\wrogn\task\service\AuthServiceImpl.class
 com\wrogn\task\entity\Role.class
 com\wrogn\task\exceptions\GlobalExceptionHandler.class
 com\wrogn\task\service\UserService.class

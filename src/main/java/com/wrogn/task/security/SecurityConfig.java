@@ -30,7 +30,7 @@ public class SecurityConfig
                                                       "/v3/api-docs/**",
                                                          "/api/auth/**")
                                 .permitAll()
-                                .requestMatchers(HttpMethod.POST,"/api/users").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/users/createUser").permitAll()
                                 .anyRequest().authenticated())
 
                 .addFilterBefore( jwtFilter, UsernamePasswordAuthenticationFilter.class);

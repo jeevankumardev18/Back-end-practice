@@ -40,7 +40,7 @@ public class UserController
 	}
 
 
-	@PostMapping
+	@PostMapping("/createUser")
 	@Operation(summary = "Create user", description = "Creates a new user")
 	@ApiResponses({
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "User created successfully"),
@@ -57,7 +57,7 @@ public class UserController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN','USER')")
-	@GetMapping("/{id}")
+	@GetMapping("/getUser/{id}")
 	@Operation(summary = "Get user by id", description = "Fetches user details using user id")
 	@ApiResponses({
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "User found"),
@@ -72,7 +72,7 @@ public class UserController
 	}
 
 
-	@GetMapping
+	@GetMapping("/allUsers")
 	@Operation(summary = "Get All users",description = "Fetched all user details")
 	public ResponseEntity<ApiResponse<List<UserResponseDto>>> getAllUsers()
 	{
@@ -85,7 +85,7 @@ public class UserController
 
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping("/{id}")
+	@PutMapping("/updateUser/{id}")
 	@Operation(summary = "Update user",description = "Updated a user")
 	public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(@PathVariable Long id,@Valid @RequestBody UserRequestDto dto)
 	{
@@ -95,7 +95,7 @@ public class UserController
 
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deleteUser/{id}")
 	@Operation(summary="Delete user", description="Deletes user by id")
     public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable Long id)
 	{
@@ -120,7 +120,7 @@ public class UserController
 	}
 
 
-	@GetMapping("/search")
+	@GetMapping("/searchUser")
 	public ResponseEntity<ApiResponse<Page<UserResponseDto>>> searchApi
 			(
 			                                                    @RequestParam String keyword,

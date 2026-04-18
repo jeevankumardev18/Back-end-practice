@@ -19,11 +19,11 @@ public class JwtUtil
     @Value("${jwt.secret}")
     private  String secret;
 
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:1800000}")
     private  long expiration;
 
 
-    @Value("${jwt.refresh.expiration}")
+    @Value("${jwt.refresh.expiration:604800000}")
     private long refreshExpiration;
 
 

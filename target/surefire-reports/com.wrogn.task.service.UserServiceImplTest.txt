@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.wrogn.task.service.UserServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.511 s <<< FAILURE! -- in com.wrogn.task.service.UserServiceImplTest
+com.wrogn.task.service.UserServiceImplTest.shouldCreateUser -- Time elapsed: 0.030 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.springframework.security.crypto.password.PasswordEncoder.encode(java.lang.CharSequence)" because "this.passwordEncoder" is null
+	at com.wrogn.task.service.UserServiceImpl.createUser(UserServiceImpl.java:45)
+	at com.wrogn.task.service.UserServiceImplTest.shouldCreateUser(UserServiceImplTest.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

@@ -20,7 +20,7 @@ public class OrderController
     }
 
 
-    @PostMapping
+    @PostMapping("/createOrder")
     public  ResponseEntity<ApiResponse<String>> createOrder(@RequestParam Long userId, @RequestParam String orderName)
     {
         orderService.createOrder(userId,orderName);
